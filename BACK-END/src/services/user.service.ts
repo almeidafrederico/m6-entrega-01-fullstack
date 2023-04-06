@@ -1,5 +1,6 @@
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/user.entity";
+import { AppError } from "../errors/AppError";
 import {
   iUserDisabled,
   iUserRequest,
@@ -16,7 +17,7 @@ const createUserService = async (
   try {
     await userRepository.save(user);
   } catch (error: any) {
-    console.log(error.detail);
+    throw new AppError(error.detail, 400);
   }
   return user;
 };

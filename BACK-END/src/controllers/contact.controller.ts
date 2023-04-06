@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   createContactService,
   deleteContactService,
+  getIdContactService,
   listContactUserService,
   updateContactService,
 } from "../services/contact.service";
@@ -38,9 +39,17 @@ const contactUpdateController = async (req: Request, res: Response) => {
   return res.status(status).json(message);
 };
 
+const contactGetIdController = async (req: Request, res: Response) => {
+  const idContact = Number(req.params.id);
+  const authToken = req.headers.authorization;
+  const [status, message] = await getIdContactService(authToken!, idContact);
+  return res.status(status).json(message);
+};
+
 export {
   contactCreateController,
   contactListController,
   contactDeleteController,
   contactUpdateController,
+  contactGetIdController,
 };

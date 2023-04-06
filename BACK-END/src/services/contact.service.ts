@@ -79,6 +79,37 @@ const updateContactService = async (
   contactId: number,
   body: iContactUpdate
 ): Promise<[number, null | { message: string } | iContact]> => {
+  try {
+    const idUserToken = decodeTokenIdUser(authToken);
+    const user = await AppDataSource.getRepository(User).findOneBy({
+      id: Number(idUserToken),
+    });
+    if (user) {
+      let contact = await contactRepository.findOne({
+        where: { user: { id: user.id }, id: contactId },
+      });
+      if (!contact) {
+        return [404, { message: "not found" }];
+      }
+      const updateContact = contactRepository.create(body);
+      await contactRepository.update(contact.id, updateContact);
+      contact = await contactRepository.findOne({
+        where: { id: contactId },
+      });
+
+      return [202, contact];
+    }
+    return [404, { message: "user not found" }];
+  } catch (err) {
+    console.log(err);
+    return [400, { message: "error" }];
+  }
+};
+
+const getIdContactService = async (
+  authToken: string,
+  contactId: number
+): Promise<[number, null | { message: string } | iContact]> => {
   const idUserToken = decodeTokenIdUser(authToken);
   const user = await AppDataSource.getRepository(User).findOneBy({
     id: Number(idUserToken),
@@ -90,12 +121,6 @@ const updateContactService = async (
     if (!contact) {
       return [404, { message: "not found" }];
     }
-    const updateContact = contactRepository.create(body);
-    await contactRepository.update(contact.id, updateContact);
-    contact = await contactRepository.findOne({
-      where: { id: contactId },
-    });
-
     return [202, contact];
   }
   return [404, { message: "user not found" }];
@@ -106,4 +131,5 @@ export {
   listContactUserService,
   deleteContactService,
   updateContactService,
+  getIdContactService,
 };
