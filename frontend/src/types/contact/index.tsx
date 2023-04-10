@@ -1,4 +1,4 @@
-interface iContact {
+export interface iContact {
   id: number;
   email: string;
   fullName: string;
@@ -6,4 +6,14 @@ interface iContact {
   createdAt: Date;
 }
 
-export default iContact;
+export interface iContactRegister {
+  email: string;
+  fullName: string;
+  telephone: string;
+}
+
+export interface iContactUpdate {
+  email?: string;
+  fullName?: string;
+  telephone?: string;
+}

@@ -1,9 +1,7 @@
 import {
-  Heading,
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
   Button,
   Center,
   Box,

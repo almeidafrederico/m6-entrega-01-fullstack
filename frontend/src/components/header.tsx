@@ -1,6 +1,7 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
+import ModalRegisterContact from "./modalContactRegister";
 
 interface iHeader {
   header: string;
@@ -29,7 +30,7 @@ const Header = ({ header, btnCadastrar, btnLogout }: iHeader) => {
             LIST PROJECT {header ? " -- " : ""}
             {header}
           </Box>
-          {btnCadastrar ? <Button>CADASTRAR CONTATO</Button> : <></>}
+          {btnCadastrar ? <ModalRegisterContact token="" /> : <></>}
           {btnLogout ? (
             <Button onClick={logoutSubmit} colorScheme="teal" variant="outline">
               LOGOUT

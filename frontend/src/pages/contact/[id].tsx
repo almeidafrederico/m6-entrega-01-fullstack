@@ -1,6 +1,6 @@
 import iContact from "@/types/contact";
 import { GetServerSideProps, NextPage } from "next";
-import api from "../services/api";
+import api from "../../services/api";
 import nookies from "nookies";
 import Header from "@/components/header";
 import ContactCard from "@/components/contactCard";

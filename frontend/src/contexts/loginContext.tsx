@@ -1,4 +1,4 @@
-import api from "@/pages/services/api";
+import api from "@/services/api";
 import { ILogin, IProviderProps } from "@/types/login";
 import { useToast, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";

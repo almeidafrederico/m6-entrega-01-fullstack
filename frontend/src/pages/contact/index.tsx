@@ -1,18 +1,11 @@
-import iContact from "@/types/contact";
+import { iContact } from "@/types/contact";
 import { GetServerSideProps, NextPage } from "next";
-import api from "../services/api";
-import {
-  Center,
-  Link,
-  List,
-  ListIcon,
-  ListItem,
-  OrderedList,
-} from "@chakra-ui/react";
+import api from "../../services/api";
+import { Center, Link, List, ListItem, OrderedList } from "@chakra-ui/react";
 import NextLink from "next/link";
-import ContactCard from "@/components/contactCard";
 import nookies from "nookies";
 import Header from "@/components/header";
+import ContactListCard from "@/components/contactListCard";
 
 interface Props {
   contacts: iContact[];
@@ -23,23 +16,15 @@ const Contacts: NextPage<Props> = ({ contacts }) => {
     <>
       <Header header="CONTACTS" btnCadastrar={true} btnLogout={true} />
       <Center>
-        <OrderedList>
+        <List>
           {contacts.map((contact, index) => {
             return (
-              <ListItem
-                key={index}
-                margin={4}
-                width={200}
-                border={2}
-                color="blue"
-              >
-                <Link px={10} as={NextLink} href={`/contact/${contact.id}`}>
-                  {contact.fullName}
-                </Link>
-              </ListItem>
+              <>
+                <ContactListCard contact={contact} index={index} />
+              </>
             );
           })}
-        </OrderedList>
+        </List>
       </Center>
     </>
   );

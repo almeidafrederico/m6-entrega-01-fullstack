@@ -1,6 +1,5 @@
 import { useToastForm } from "@/contexts/toastContext";
-import { UserRegisterContext } from "@/contexts/userRegisterContext";
-import api from "@/pages/services/api";
+import api from "@/services/api";
 import { iUserRegister } from "@/types/user";
 import {
   Modal,
@@ -56,7 +55,7 @@ const ModalRegister = () => {
       const respApi = await api.post("/user", Data);
       if (respApi.status === 201) {
         toast({
-          title: "error",
+          title: "sucess",
           message: `Usuario criado com SUCESSO!`,
           position: "top-left",
           color: "green.500",

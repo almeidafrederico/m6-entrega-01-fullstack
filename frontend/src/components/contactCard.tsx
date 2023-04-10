@@ -1,11 +1,18 @@
-import iContact from "@/types/contact";
-import { Badge, Box } from "@chakra-ui/react";
+import { iContact } from "@/types/contact";
+import { Badge, Box, Button, Flex } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import ModalContactUpdate from "./modalContactUpdate";
 
 interface IContactCard {
   contact: iContact;
 }
 
 const ContactCard = ({ contact }: IContactCard) => {
+  const router = useRouter();
+  const backSubmit = () => {
+    router.push("/contact");
+  };
+
   return (
     <Box
       maxW="sm"
@@ -40,6 +47,10 @@ const ContactCard = ({ contact }: IContactCard) => {
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
             Created {String(contact.createdAt)}
           </Box>
+          <Flex justifyContent="space-between" marginTop={5}>
+            <Button onClick={backSubmit}>VOLTA</Button>
+            <ModalContactUpdate contact={contact} />
+          </Flex>
         </Box>
       </Box>
     </Box>
