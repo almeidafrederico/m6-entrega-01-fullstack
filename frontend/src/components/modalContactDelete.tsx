@@ -11,10 +11,8 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Spacer,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -72,7 +70,7 @@ const ModalContactDelete = ({ contact }: iProps) => {
           <ModalBody>
             <FormControl>
               <FormLabel>
-                Tem certeza que quer deletar o contato "{contact.fullName}"
+                Tem certeza que quer deletar o contato {contact.fullName}
               </FormLabel>
             </FormControl>
           </ModalBody>
